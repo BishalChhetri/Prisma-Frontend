@@ -1,49 +1,57 @@
-import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useQuery } from "react-query";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
 import callApi from "../routes/api";
 
-const SignUp = () => {
+const updatePassword = () => {
   const navigate = useNavigate();
+  if (localStorage.getItem("id") === null) {
+    navigate("/sigin");
+  }
+
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
+    oldPassword: "",
+    newPassword: "",
+    confirmNewPassword: "",
   });
-
-  useEffect(() => {
-    if (localStorage.getItem("jwttoken") !== null) {
-      return navigate("/tasks");
-    }
-  }, []);
-
   const onFormSubmit = async (e: React.ChangeEvent<any>) => {
     e.preventDefault();
-    if (formData.password !== formData.confirmPassword) {
-      return toast.error("Password doesn't matches!", {
+    if (
+      formData.oldPassword === "" ||
+      formData.newPassword === "" ||
+      formData.confirmNewPassword === ""
+    ) {
+      return toast.info("Field cannot be empty!", {
         position: toast.POSITION.BOTTOM_LEFT,
       });
     }
-    if (formData.name.length === 0 || formData.email.length === 0) {
-      return toast.warning("Please enter all credentials!", {
+    if (formData.oldPassword === formData.newPassword) {
+      return toast.warning("Please, Enter different password.", {
         position: toast.POSITION.BOTTOM_LEFT,
       });
     }
+    if (formData.newPassword !== formData.confirmNewPassword) {
+      return toast.error("Password doenot match.", {
+        position: toast.POSITION.BOTTOM_LEFT,
+      });
+    }
+    const id = localStorage.getItem("id");
     try {
       const response = await callApi({
-        url: "auth/signup",
+        url: "auth/updatePassword",
         method: "POST",
-        data: formData,
+        data: {
+          id,
+          password: formData.oldPassword,
+          newPassword: formData.newPassword,
+        },
       });
-      toast.success("Succesfully created Account!", {
+      toast.success("Succesfully changed password.", {
         position: toast.POSITION.BOTTOM_LEFT,
       });
-      setTimeout(() => {
-        navigate("/signin");
-      }, 2000);
+      setTimeout(() => navigate("/signin"), 1000);
     } catch (e: any) {
       toast.error(`${e.response.data.message}`, {
         position: toast.POSITION.BOTTOM_LEFT,
@@ -51,42 +59,24 @@ const SignUp = () => {
     }
   };
   return (
-    <div className="signup">
+    <div className="updatepassword">
       <div className="flex flex-col items-center min-h-screen pt-6 sm:justify-center sm:pt-0 bg-gray-50">
         <div className="w-full px-6 py-4 mt-6 overflow-hidden bg-white shadow-md sm:max-w-md sm:rounded-lg">
           <form onSubmit={onFormSubmit}>
-            <div>
-              <label
-                htmlFor="name"
-                className="block text-sm font-medium text-gray-700 undefined"
-              >
-                Name
-              </label>
-              <div className="flex flex-col items-start">
-                <input
-                  type="text"
-                  name="name"
-                  className="block w-full mt-1 border-gray-300 rounded-md text-stone-900 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                  onChange={(e) =>
-                    setFormData({ ...formData, name: e.target.value })
-                  }
-                />
-              </div>
-            </div>
             <div className="mt-4">
               <label
                 htmlFor="email"
                 className="block text-sm font-medium text-gray-700 undefined"
               >
-                Email
+                Old Password
               </label>
               <div className="flex flex-col items-start">
                 <input
-                  type="email"
-                  name="email"
+                  type="password"
+                  name="password"
                   className="block w-full mt-1 border-gray-300 rounded-md text-stone-900 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                   onChange={(e) =>
-                    setFormData({ ...formData, email: e.target.value })
+                    setFormData({ ...formData, oldPassword: e.target.value })
                   }
                 />
               </div>
@@ -96,7 +86,7 @@ const SignUp = () => {
                 htmlFor="password"
                 className="block text-sm font-medium text-gray-700 undefined"
               >
-                Password
+                New Password
               </label>
               <div className="flex flex-col items-start">
                 <input
@@ -104,46 +94,38 @@ const SignUp = () => {
                   name="password"
                   className="block w-full mt-1 border-gray-300 rounded-md text-stone-900 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                   onChange={(e) =>
-                    setFormData({ ...formData, password: e.target.value })
+                    setFormData({ ...formData, newPassword: e.target.value })
                   }
                 />
               </div>
             </div>
             <div className="mt-4">
               <label
-                htmlFor="password_confirmation"
+                htmlFor="password"
                 className="block text-sm font-medium text-gray-700 undefined"
               >
-                Confirm Password
+                Confirm New Password
               </label>
               <div className="flex flex-col items-start">
                 <input
                   type="password"
-                  name="password_confirmation"
+                  name="password"
                   className="block w-full mt-1 border-gray-300 rounded-md text-stone-900 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                   onChange={(e) =>
                     setFormData({
                       ...formData,
-                      confirmPassword: e.target.value,
+                      confirmNewPassword: e.target.value,
                     })
                   }
                 />
               </div>
             </div>
-            <div className="flex items-center justify-end mt-4">
-              <Link
-                className="text-sm text-gray-600 underline hover:text-gray-900"
-                to="/signin"
-              >
-                {" "}
-                Already have an account?
-              </Link>
-
+            <div className="flex  items-center justify-end mt-4">
               <button
                 type="submit"
-                className="inline-flex items-center px-4 py-2 ml-4 text-xs font-semibold tracking-widest text-white uppercase transition duration-150 ease-in-out bg-red-900 border border-transparent rounded-md active:bg-gray-900 false"
+                className="inline-flex items-center  px-4 py-2 ml-4 text-xs font-semibold tracking-widest text-white uppercase transition duration-150 ease-in-out bg-red-800 border border-transparent rounded-md active:bg-gray-900 false"
               >
-                SignUp
+                Update
               </button>
             </div>
           </form>
@@ -154,4 +136,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default updatePassword;

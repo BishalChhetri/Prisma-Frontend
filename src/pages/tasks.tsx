@@ -14,11 +14,14 @@ import {
   TextField,
   Button,
   FormControl,
+  AppBar,
+  Toolbar,
 } from "@material-ui/core";
 import callApi from "../routes/api";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import logo from "../assets/logo.png";
 
 const useStyles = makeStyles((theme) => ({
   dialogWrapper: {
@@ -238,7 +241,7 @@ export default function Tasks() {
   };
 
   return (
-    <>
+    <div>
       {addTask ? (
         <Dialog
           open={addTask}
@@ -474,6 +477,49 @@ export default function Tasks() {
         ""
       )}
       <div>
+        <AppBar position="static" style={{ backgroundColor: "#f48915" }}>
+          <Toolbar>
+            <Typography>
+              <img src={logo} width="50rem" />
+            </Typography>
+
+            <div style={{ flexGrow: 1 }}></div>
+            <div>
+              <Button
+                aria-controls="simple-menu"
+                aria-haspopup="true"
+                className={styles.appbar_button}
+                style={{
+                  color: "#ffffff",
+                  fontWeight: "bold",
+                  fontSize: "0.7rem",
+                  backgroundColor: "#b54",
+                  borderRadius: "6px",
+                  margin: "2px",
+                }}
+                onClick={() => navigate("/updatePassword")}
+              >
+                Change Password
+              </Button>
+
+              <Button
+                aria-controls="simple-menu"
+                aria-haspopup="true"
+                onClick={handleLogOut}
+                style={{
+                  color: "#ffffff",
+                  fontWeight: "bold",
+                  fontSize: "0.7rem",
+                  backgroundColor: "#b54",
+                  borderRadius: "6px",
+                  margin: "2px",
+                }}
+              >
+                Logout
+              </Button>
+            </div>
+          </Toolbar>
+        </AppBar>
         <header className={styles.header}>
           <div className={styles.newTaskForm}>
             <input
@@ -505,7 +551,7 @@ export default function Tasks() {
             </div>
             <div className="relative xs:max-w-xs">
               <select
-                className="p-2.5 w-30 text-gray-500 bg-white border rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600"
+                className="p-2.5 m-1 w-30 text-gray-500 bg-white border rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600"
                 name="status"
                 onChange={handleFilter}
               >
@@ -515,21 +561,6 @@ export default function Tasks() {
                 <option value="false">Not Started</option>
                 <option value="true">Completed</option>
               </select>
-            </div>
-            <div>
-              <button
-                style={{
-                  margin: "8px",
-                  padding: "5px",
-                  backgroundColor: "orangered",
-                  color: "white",
-                  border: "3px solid black",
-                  borderRadius: "8px",
-                }}
-                onClick={handleLogOut}
-              >
-                LogOut
-              </button>
             </div>
           </header>
 
@@ -572,6 +603,6 @@ export default function Tasks() {
         </section>
         <ToastContainer />
       </div>
-    </>
+    </div>
   );
 }

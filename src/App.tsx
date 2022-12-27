@@ -3,6 +3,7 @@ import SignIn from "./pages/signin";
 import "./index.css";
 import { QueryClient, QueryClientProvider, useQuery } from "react-query";
 import Tasks from "./pages/tasks";
+import UpdatePassword from "./pages/updatePassword";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 const queryClient = new QueryClient({
@@ -24,6 +25,7 @@ function App() {
           <Route path="/" element={<SignIn />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/updatepassword" element={<UpdatePassword />} />
           <Route path="/tasks" element={<Tasks />} />
         </Routes>
       </BrowserRouter>
