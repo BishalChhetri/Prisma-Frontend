@@ -1,3 +1,12 @@
+.tasks_div {
+  background-image: url(./src/assets/background.jpg);
+  width: 100%;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
 .tasks {
   width: 100%;
   max-width: 736px;
@@ -18,13 +27,13 @@
 }
 
 .header p {
-  color: #4ea8de;
+  color: yellow;
   font-size: 14px;
   font-weight: 700;
 }
 
 .textPurple {
-  color: #8284fa !important;
+  color: darkblue !important;
 }
 
 .header span {

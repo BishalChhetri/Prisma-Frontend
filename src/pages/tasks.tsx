@@ -241,7 +241,7 @@ export default function Tasks() {
   };
 
   return (
-    <div>
+    <div className={styles.tasks_div}>
       {addTask ? (
         <Dialog
           open={addTask}

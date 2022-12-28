@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 import callApi from "../routes/api";
 
 const updatePassword = () => {
@@ -59,14 +58,14 @@ const updatePassword = () => {
     }
   };
   return (
-    <div className="updatepassword">
-      <div className="flex flex-col items-center min-h-screen pt-6 sm:justify-center sm:pt-0 bg-gray-50">
-        <div className="w-full px-6 py-4 mt-6 overflow-hidden bg-white shadow-md sm:max-w-md sm:rounded-lg">
+    <div>
+      <div className="flex flex-col items-center min-h-screen pt-6 sm:justify-center sm:pt-0 ">
+        <div className="w-full px-6 py-4 mt-6 overflow-hidden bg-inherit shadow-md sm:max-w-md sm:rounded-lg">
           <form onSubmit={onFormSubmit}>
             <div className="mt-4">
               <label
                 htmlFor="email"
-                className="block text-sm font-medium text-gray-700 undefined"
+                className="block text-sm font-bold text-white-700 undefined"
               >
                 Old Password
               </label>
@@ -84,7 +83,7 @@ const updatePassword = () => {
             <div className="mt-4">
               <label
                 htmlFor="password"
-                className="block text-sm font-medium text-gray-700 undefined"
+                className="block text-sm font-bold text-white-700 undefined"
               >
                 New Password
               </label>
@@ -102,7 +101,7 @@ const updatePassword = () => {
             <div className="mt-4">
               <label
                 htmlFor="password"
-                className="block text-sm font-medium text-gray-700 undefined"
+                className="block text-sm font-bold text-white-700 undefined"
               >
                 Confirm New Password
               </label>

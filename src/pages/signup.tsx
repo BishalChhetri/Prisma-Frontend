@@ -51,14 +51,14 @@ const SignUp = () => {
     }
   };
   return (
-    <div className="signup">
-      <div className="flex flex-col items-center min-h-screen pt-6 sm:justify-center sm:pt-0 bg-gray-50">
-        <div className="w-full px-6 py-4 mt-6 overflow-hidden bg-white shadow-md sm:max-w-md sm:rounded-lg">
+    <div>
+      <div className="flex flex-col items-center min-h-screen pt-6 sm:justify-center sm:pt-0 ">
+        <div className="w-full px-6 py-4 mt-6 overflow-hidden bg-inherit shadow-md sm:max-w-md sm:rounded-lg">
           <form onSubmit={onFormSubmit}>
             <div>
               <label
                 htmlFor="name"
-                className="block text-sm font-medium text-gray-700 undefined"
+                className="block text-sm font-bold text-white-700 undefined"
               >
                 Name
               </label>
@@ -76,7 +76,7 @@ const SignUp = () => {
             <div className="mt-4">
               <label
                 htmlFor="email"
-                className="block text-sm font-medium text-gray-700 undefined"
+                className="block text-sm font-bold text-white-700 undefined"
               >
                 Email
               </label>
@@ -94,7 +94,7 @@ const SignUp = () => {
             <div className="mt-4">
               <label
                 htmlFor="password"
-                className="block text-sm font-medium text-gray-700 undefined"
+                className="block text-sm font-bold text-white-700 undefined"
               >
                 Password
               </label>
@@ -112,7 +112,7 @@ const SignUp = () => {
             <div className="mt-4">
               <label
                 htmlFor="password_confirmation"
-                className="block text-sm font-medium text-gray-700 undefined"
+                className="block text-sm font-bold text-white-700 undefined"
               >
                 Confirm Password
               </label>
@@ -132,7 +132,7 @@ const SignUp = () => {
             </div>
             <div className="flex items-center justify-end mt-4">
               <Link
-                className="text-sm text-gray-600 underline hover:text-gray-900"
+                className="text-sm text-white-600 underline hover:font-bold"
                 to="/signin"
               >
                 {" "}
@@ -143,7 +143,7 @@ const SignUp = () => {
                 type="submit"
                 className="inline-flex items-center px-4 py-2 ml-4 text-xs font-semibold tracking-widest text-white uppercase transition duration-150 ease-in-out bg-red-900 border border-transparent rounded-md active:bg-gray-900 false"
               >
-                SignUp
+                Sign Up
               </button>
             </div>
           </form>
