@@ -39,7 +39,7 @@ const SignIn = () => {
       });
       setTimeout(() => navigate("/tasks"), 1000);
     } catch (e: any) {
-      toast.error(`${e.response.data.message}`, {
+      toast.error(`${e.response?.data.message}`, {
         position: toast.POSITION.BOTTOM_LEFT,
       });
     }
