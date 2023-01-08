@@ -12,10 +12,6 @@ const SignIn = () => {
     if (localStorage.getItem("jwttoken") !== null) {
       return navigate("/tasks");
     }
-
-    toast.info("Please enter your credentials.", {
-      position: toast.POSITION.TOP_CENTER,
-    });
   }, []);
 
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -47,7 +43,7 @@ const SignIn = () => {
   return (
     <div>
       <div className="flex flex-col items-center min-h-screen pt-6 sm:justify-center sm:pt-0 ">
-        <div className="w-full px-6 py-4 mt-6 overflow-hidden bg-inherit shadow-md sm:max-w-md sm:rounded-lg">
+        <div className="w-full px-6 py-4 mt-6 overflow-hidden bg-inherit sm:max-w-md sm:rounded-lg">
           <form onSubmit={onFormSubmit}>
             <div className="mt-4">
               <label

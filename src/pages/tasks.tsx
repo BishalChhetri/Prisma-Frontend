@@ -231,7 +231,7 @@ export default function Tasks() {
             </div>
 
             <div>
-              <p className={styles.textPurple}>Completed tasks</p>
+              <p className="text-[color:#00008B]">Completed tasks</p>
               <span>
                 {completedTasks} of {tasksQuantity}
               </span>
@@ -251,7 +251,7 @@ export default function Tasks() {
             </div>
           </header>
 
-          <div className={styles.list}>
+          <div className="flex flex-col gap-3">
             {tasks.map((task) =>
               task.id.length > 0 ? (
                 <div className={styles.task} key={task.id}>
@@ -269,14 +269,14 @@ export default function Tasks() {
                   </p>
                   {
                     <button
-                      className={styles.deleteButton}
+                      className="text-[color:#808080]"
                       onClick={() => onView(task.id)}
                     >
                       {task.isCompleted ? "View" : "Edit"}
                     </button>
                   }
                   <button
-                    className={styles.deleteButton}
+                    className="text-[color:#808080]"
                     onClick={() => onDelete(task.id)}
                   >
                     <TbTrash size={20} />
